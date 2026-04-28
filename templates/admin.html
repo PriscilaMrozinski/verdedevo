@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Verde de Vó</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-green-50 min-h-screen flex">
+
+<!-- MENU LATERAL -->
+<aside class="w-72 bg-green-800 text-white p-8">
+
+<h1 class="text-3xl font-bold mb-10">
+🌿 Verde de Vó
+</h1>
+
+<nav class="space-y-4">
+
+<a href="/admin"
+class="block bg-green-700 px-4 py-3 rounded-xl">
+Dashboard
+</a>
+
+<a href="/adicionar"
+class="block hover:bg-green-700 px-4 py-3 rounded-xl transition">
+Nova Planta
+</a>
+
+<a href="/"
+class="block hover:bg-green-700 px-4 py-3 rounded-xl transition">
+Site Público
+</a>
+
+</nav>
+
+</aside>
+
+<!-- CONTEÚDO -->
+<main class="flex-1 p-10">
+
+<!-- TOPO -->
+<div class="flex justify-between items-center mb-10">
+
+<div>
+<h2 class="text-4xl font-bold text-green-900">
+Painel Administrativo
+</h2>
+
+<p class="text-gray-600 mt-2">
+Gerencie a base de plantas medicinais
+</p>
+</div>
+
+<a href="/adicionar"
+class="bg-green-700 text-white px-6 py-3 rounded-xl shadow hover:bg-green-800 transition">
++ Nova Planta
+</a>
+
+</div>
+
+<!-- BUSCA -->
+
+<div class="bg-white p-6 rounded-2xl shadow mb-10">
+
+<form method="GET" action="/admin" class="flex gap-4">
+
+<input
+type="text"
+name="busca"
+value="{{ busca }}"
+placeholder="Buscar planta por nome popular ou científico..."
+class="flex-1 border border-gray-300 p-3 rounded-xl">
+
+<button
+class="bg-green-700 text-white px-6 rounded-xl hover:bg-green-800">
+Buscar
+</button>
+
+<a href="/admin"
+class="bg-gray-300 px-6 rounded-xl flex items-center">
+Limpar
+</a>
+
+</form>
+
+</div>
+
+<!-- CARDS -->
+<div class="grid md:grid-cols-3 gap-6 mb-10">
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<p class="text-gray-500">Total de Plantas</p>
+<h3 class="text-4xl font-bold text-green-800 mt-2">
+{{ plantas|length }}
+</h3>
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<p class="text-gray-500">Sistema</p>
+<h3 class="text-2xl font-bold text-blue-700 mt-2">
+Ativo
+</h3>
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<p class="text-gray-500">Banco</p>
+<h3 class="text-2xl font-bold text-orange-600 mt-2">
+JSON
+</h3>
+</div>
+
+</div>
+<!-- GRÁFICOS -->
+
+<div class="grid md:grid-cols-3 gap-6 mb-10">
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<h3 class="font-bold text-xl mb-4">🌿 Partes Utilizadas</h3>
+<canvas id="graficoPartes" height="180"></canvas>
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<h3 class="font-bold text-xl mb-4">💚 Top 5 Benefícios</h3>
+<canvas id="graficoBeneficios" height="180"></canvas>
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<h3 class="font-bold text-xl mb-4">🔎 Mais Pesquisadas</h3>
+<canvas id="graficoTop" height="180"></canvas>
+</div>
+
+</div>
+
+<!-- TABELA -->
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-2xl font-bold text-green-900 mb-6">
+Lista de Plantas
+</h3>
+
+<table class="w-full">
+
+<tr class="border-b text-left text-gray-600">
+<th class="py-3">Nome Popular</th>
+<th>Nome Científico</th>
+<th class="text-center">Ações</th>
+</tr>
+
+{% for planta in plantas %}
+<tr class="border-b hover:bg-green-50 transition">
+
+<td class="py-4 font-semibold">
+{{ planta.nome_popular }}
+</td>
+
+<td>
+{{ planta.nome_cientifico }}
+</td>
+
+<td class="text-center space-x-3">
+
+<a href="/editar/{{ planta.id }}"
+class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">
+Editar
+</a>
+
+<a href="/excluir/{{ planta.id }}"
+onclick="return confirm('Tem certeza que deseja excluir {{ planta.nome_popular }}?')"
+class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600">
+Excluir
+</a>
+
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</main>
+
+<script>
+
+new Chart(document.getElementById("graficoPartes"), {
+    type: "bar",
+    data: {
+        labels: {{ partes_labels | tojson }},
+        datasets: [{
+            label: "Quantidade",
+            data: {{ partes_valores | tojson }}
+        }]
+    }
+});
+
+new Chart(document.getElementById("graficoBeneficios"), {
+    type: "pie",
+    data: {
+        labels: {{ beneficios_labels | tojson }},
+        datasets: [{
+            data: {{ beneficios_valores | tojson }}
+        }]
+    }
+});
+
+new Chart(document.getElementById("graficoTop"), {
+    type: "line",
+    data: {
+        labels: {{ top_labels | tojson }},
+        datasets: [{
+            label: "Pesquisas",
+            data: {{ top_valores | tojson }}
+        }]
+    }
+});
+
+</script>
+</body>
+</html>

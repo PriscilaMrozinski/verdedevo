@@ -1,0 +1,334 @@
+[
+  {
+    "id": 3,
+    "nome_popular": "Hortelã",
+    "nome_cientifico": "Mentha spp",
+    "sinonimos": [
+      "menta"
+    ],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "digestiva",
+      "refrescante"
+    ],
+    "indicacoes": [
+      "má digestão",
+      "náusea"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 4,
+    "nome_popular": "Boldo",
+    "nome_cientifico": "Plectranthus barbatus",
+    "sinonimos": [
+      "Coleus barbatus"
+    ],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "fígado",
+      "digestão"
+    ],
+    "indicacoes": [
+      "azia",
+      "má digestão"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 5,
+    "nome_popular": "Guaco",
+    "nome_cientifico": "Mikania spp",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "broncodilatador"
+    ],
+    "indicacoes": [
+      "tosse",
+      "bronquite"
+    ],
+    "preparo": "xarope ou chá",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 6,
+    "nome_popular": "Mulungu",
+    "nome_cientifico": "Erythrina mulungu",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "casca"
+    ],
+    "beneficios": [
+      "calmante"
+    ],
+    "indicacoes": [
+      "estresse",
+      "ansiedade"
+    ],
+    "preparo": "decocção",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 8,
+    "nome_popular": "Maracujá",
+    "nome_cientifico": "Passiflora spp",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas",
+      "fruto"
+    ],
+    "beneficios": [
+      "calmante"
+    ],
+    "indicacoes": [
+      "ansiedade",
+      "sono"
+    ],
+    "preparo": "chá ou suco",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 9,
+    "nome_popular": "Alecrim-pimenta",
+    "nome_cientifico": "Lippia sidoides",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "antisséptico"
+    ],
+    "indicacoes": [
+      "garganta",
+      "pele"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 10,
+    "nome_popular": "Alcachofra",
+    "nome_cientifico": "Cynara scolymus",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "digestiva"
+    ],
+    "indicacoes": [
+      "ácido úrico",
+      "fígado"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 11,
+    "nome_popular": "Alho",
+    "nome_cientifico": "Allium sativum",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "bulbo"
+    ],
+    "beneficios": [
+      "anti-inflamatório",
+      "anti-séptico"
+    ],
+    "indicacoes": [
+      "pressão alta",
+      "imunidade"
+    ],
+    "preparo": "uso culinário",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 12,
+    "nome_popular": "Cavalinha",
+    "nome_cientifico": "Equisetum arvense",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "caules estéreis"
+    ],
+    "beneficios": [
+      "diurético"
+    ],
+    "indicacoes": [
+      "retenção de líquido"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 13,
+    "nome_popular": "Erva-baleeira",
+    "nome_cientifico": "Varronia curassavica",
+    "sinonimos": [
+      "Cordia verbenacea"
+    ],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "anti-inflamatório"
+    ],
+    "indicacoes": [
+      "dor muscular"
+    ],
+    "preparo": "pomada ou chá",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 14,
+    "nome_popular": "Espinheira-santa",
+    "nome_cientifico": "Maytenus ilicifolia",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "estomacal"
+    ],
+    "indicacoes": [
+      "gastrite",
+      "azia"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 15,
+    "nome_popular": "Funcho",
+    "nome_cientifico": "Foeniculum vulgare",
+    "sinonimos": [
+      "erva-doce"
+    ],
+    "parte_utilizada": [
+      "sementes"
+    ],
+    "beneficios": [
+      "digestivo"
+    ],
+    "indicacoes": [
+      "cólicas",
+      "gases"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 16,
+    "nome_popular": "Quebra-pedra",
+    "nome_cientifico": "Phyllanthus niruri",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "partes aéreas"
+    ],
+    "beneficios": [
+      "urinário"
+    ],
+    "indicacoes": [
+      "cálculos renais"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 17,
+    "nome_popular": "Romã",
+    "nome_cientifico": "Punica granatum",
+    "sinonimos": [
+      "romãzeira"
+    ],
+    "parte_utilizada": [
+      "casca do fruto"
+    ],
+    "beneficios": [
+      "garganta"
+    ],
+    "indicacoes": [
+      "inflamação na garganta"
+    ],
+    "preparo": "gargarejo",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 18,
+    "nome_popular": "Arruda",
+    "nome_cientifico": "Ruta graveolens",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "tradicional"
+    ],
+    "indicacoes": [
+      "uso popular"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "usar com cautela",
+    "foto": ""
+  },
+  {
+    "id": 19,
+    "nome_popular": "Aroeira",
+    "nome_cientifico": "Schinus terebinthifolius",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "casca"
+    ],
+    "beneficios": [
+      "cicatrizante"
+    ],
+    "indicacoes": [
+      "feridas"
+    ],
+    "preparo": "banho ou infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 20,
+    "nome_popular": "Barbatimão",
+    "nome_cientifico": "Stryphnodendron adstringens",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "casca"
+    ],
+    "beneficios": [
+      "cicatrizante",
+      "adstringente"
+    ],
+    "indicacoes": [
+      "feridas",
+      "pele"
+    ],
+    "preparo": "banho ou decocção",
+    "contraindicacoes": "",
+    "foto": ""
+  }
+]

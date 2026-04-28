@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verde de Vó</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuração personalizada -->
+  <script src="/assets/config/tailwind-config.js"></script>
+</head>
+
+<body class="bg-creme text-gray-700">
+
+  <!-- HEADER -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <img src="/assets/img/logo.png" alt="Logo" class="w-12 h-12 rounded-full object-cover">
+        <div>
+          <h1 class="text-2xl font-bold text-musgo">Verde de Vó</h1>
+          <p class="text-sm text-gray-500">O cuidado natural que vem da nossa terra</p>
+        </div>
+      </div>
+
+      <!-- Menu -->
+      <nav class="hidden md:block">
+        <ul class="flex gap-6 font-medium">
+          <li><a href="#" class="hover:text-folha">Início</a></li>
+          <li><a href="#" class="hover:text-folha">Plantas</a></li>
+          <li><a href="#" class="hover:text-folha">Sintomas</a></li>
+          <li><a href="#" class="hover:text-folha">Benefícios</a></li>
+        </ul>
+      </nav>
+
+      <!-- Botão Mobile -->
+      <button id="menuBtn" class="md:hidden text-2xl">☰</button>
+
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4">
+      <ul class="space-y-3">
+        <li><a href="#">Início</a></li>
+        <li><a href="#">Plantas</a></li>
+        <li><a href="#">Sintomas</a></li>
+        <li><a href="#">Benefícios</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+
+    <div>
+      <p class="text-folha font-semibold uppercase tracking-wide">
+        Sabedoria popular e natureza
+      </p>
+
+      <h2 class="text-5xl font-bold text-musgo mt-4 leading-tight">
+        Remédios da terra, carinho em cada cuidado
+      </h2>
+
+      <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+        Consulte plantas medicinais, benefícios tradicionais e
+        descubra conhecimentos passados entre gerações.
+      </p>
+
+      <!-- Busca -->
+      <div class="mt-8 bg-white rounded-2xl shadow-lg p-3 flex flex-col sm:flex-row gap-3">
+        <input
+          type="text"
+          id="campoBusca"
+          placeholder="Digite uma planta ou sintoma..."
+          class="flex-1 px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-folha"
+        >
+
+        <button
+          id="btnConsulta"
+          class="bg-folha hover:bg-musgo text-white px-6 py-3 rounded-xl font-semibold transition"
+        >
+          Consultar
+        </button>
+      </div>
+
+      <p id="resultado" class="mt-4 text-musgo font-medium"></p>
+    </div>
+
+    <div>
+      <img
+        src="/assets/img/hero.jpg"
+        alt="Plantas Medicinais"
+        class="rounded-3xl shadow-2xl w-full h-[420px] object-cover"
+      >
+    </div>
+
+  </section>
+
+  <!-- CARDS -->
+  <section class="bg-white py-20">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-12">
+        <h3 class="text-4xl font-bold text-musgo">Pesquise do seu jeito</h3>
+        <p class="text-gray-500 mt-3">
+          Informações simples e acolhedoras sobre saúde natural.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-6">
+
+        <div class="bg-creme rounded-2xl p-6 shadow-sm hover:-translate-y-2 transition">
+          <div class="text-4xl mb-4">🌱</div>
+          <h4 class="font-bold text-xl text-musgo">Buscar Planta</h4>
+        </div>
+
+        <div class="bg-creme rounded-2xl p-6 shadow-sm hover:-translate-y-2 transition">
+          <div class="text-4xl mb-4">🤒</div>
+          <h4 class="font-bold text-xl text-musgo">Buscar Sintoma</h4>
+        </div>
+
+        <div class="bg-creme rounded-2xl p-6 shadow-sm hover:-translate-y-2 transition">
+          <div class="text-4xl mb-4">💚</div>
+          <h4 class="font-bold text-xl text-musgo">Benefícios</h4>
+        </div>
+
+        <div class="bg-creme rounded-2xl p-6 shadow-sm hover:-translate-y-2 transition">
+          <div class="text-4xl mb-4">🍵</div>
+          <h4 class="font-bold text-xl text-musgo">Preparo</h4>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-musgo text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h4 class="text-2xl font-bold">Verde de Vó</h4>
+      <p class="mt-2 text-white/80">
+        O cuidado natural que vem da nossa terra
+      </p>
+      <p class="mt-6 text-sm text-white/60">
+        © 2026 Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
