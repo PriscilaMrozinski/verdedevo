@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, redirect, jsonify
 import json
 
+# para normalizar acentos, ç, etc
+import unicodedata 
+
+#  ---------------------------------------------------
+
 app = Flask(
     __name__,
     template_folder="../templates",
@@ -9,6 +14,22 @@ app = Flask(
 
 ARQUIVO_JSON = "backend/banco_plantas.json"
 
+#  ---------------------------------------------------
+
+# para normalizar acentos, ç, etc
+def normalizar_texto(texto):
+    texto = texto.lower()
+
+    texto = unicodedata.normalize("NFD", texto)
+
+    texto = "".join(
+        c for c in texto
+        if unicodedata.category(c) != "Mn"
+    )
+
+    return texto
+
+#  ---------------------------------------------------
 
 def carregar_dados():
     with open(ARQUIVO_JSON, encoding="utf-8") as arquivo:
@@ -19,6 +40,72 @@ def salvar_dados(dados):
     with open(ARQUIVO_JSON, "w", encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, ensure_ascii=False, indent=2)
 
+
+# Com normalização de acento, ç, etc
+def calcular_relevancia(termo, planta):
+
+    score = 0
+
+    texto = (
+        planta["nome_popular"] + " " +
+        planta["nome_cientifico"] + " " +
+        " ".join(planta["beneficios"]) + " " +
+        " ".join(planta["indicacoes"]) + " " +
+        " ".join(planta["sinonimos"])
+    )
+
+    texto = normalizar_texto(texto)
+    palavras = normalizar_texto(termo).split()
+
+    for palavra in palavras:
+        if palavra in texto:
+            score += 1
+
+    return score
+
+# -- Etapa 2 - evoluindo busca
+# def calcular_relevancia(termo, planta):
+#     score = 0
+
+#     texto = (
+#         planta["nome_popular"] + " " +
+#         planta["nome_cientifico"] + " " +
+#         " ".join(planta["beneficios"]) + " " +
+#         " ".join(planta["indicacoes"])
+#     ).lower()
+
+#     palavras = termo.lower().split()
+
+#     for palavra in palavras:
+#         if palavra in texto:
+#             score += 1
+
+#     return score
+
+# Etapa 1 
+# -- Função (PLN básico sem IA), para calcular score comparando com a lista de plantas
+# NLP (Processamento de Linguagem Natural) - versão rule-based (sem machine learning)
+# -- Avalia cada planta individualmente // usa regras (keyword matching + score)
+# def calcular_relevancia(termo, planta):
+
+#     score = 0
+#     termo = termo.lower()
+
+#     # nome
+#     if termo in planta["nome_popular"].lower():
+#         score += 5
+
+#     # sintomas / indicações
+#     for item in planta["indicacoes"]:
+#         if termo in item.lower():
+#             score += 3
+
+#     # benefícios
+#     for item in planta["beneficios"]:
+#         if termo in item.lower():
+#             score += 2
+
+#     return score
 
 @app.route("/")
 def inicio():
@@ -179,58 +266,197 @@ def excluir(id):
 
     return redirect("/admin")
 
+
+# Etapa 3 - Retornar Três plantas, após busca
+# Lembrando que deve atualizar o "Bloco de Resposta no front (main.js)"
+#  A função Score pode ser mantida a mesma
 @app.route("/buscar")
 def buscar():
 
-    termo = request.args.get("q", "").lower().strip()
-
+    termo = normalizar_texto(request.args.get("q", ""))
     plantas = carregar_dados()
 
+    resultados = []
+
     for planta in plantas:
+        score = calcular_relevancia(termo, planta)
 
-        nome = planta["nome_popular"].lower().strip()
-        cientifico = planta["nome_cientifico"].lower().strip()
-
-        # busca por nome popular
-        if termo in nome:
-
-            return jsonify({
-                "status": "ok",
-                "nome": planta["nome_popular"],
-                "cientifico": planta["nome_cientifico"],
-                "beneficios": ", ".join(planta["beneficios"]),
-                "parte": ", ".join(planta["parte_utilizada"]),
-                "preparo": planta["preparo"]
+        if score > 0:
+            resultados.append({
+                "planta": planta,
+                "score": score
             })
 
-        # busca por nome científico
-        if termo in cientifico:
+    # ordenar por relevância
+    resultados.sort(key=lambda x: x["score"], reverse=True)
 
-            return jsonify({
-                "status": "ok",
-                "nome": planta["nome_popular"],
-                "cientifico": planta["nome_cientifico"],
-                "beneficios": ", ".join(planta["beneficios"]),
-                "parte": ", ".join(planta["parte_utilizada"]),
-                "preparo": planta["preparo"]
+    # pegar TOP 3
+    top = resultados[:3]
+
+    if top:
+
+        resposta = []
+
+        for item in top:
+            p = item["planta"]
+
+            resposta.append({
+                "nome": p["nome_popular"],
+                "cientifico": p["nome_cientifico"],
+                "beneficios": ", ".join(p["beneficios"]),
+                "parte": ", ".join(p["parte_utilizada"]),
+                "preparo": p["preparo"],
+                "score": item["score"]
             })
 
-        # busca por sinônimos
-        for sinonimo in planta["sinonimos"]:
-            if termo in sinonimo.lower():
-
-                return jsonify({
-                    "status": "ok",
-                    "nome": planta["nome_popular"],
-                    "cientifico": planta["nome_cientifico"],
-                    "beneficios": ", ".join(planta["beneficios"]),
-                    "parte": ", ".join(planta["parte_utilizada"]),
-                    "preparo": planta["preparo"]
-                })
+        return jsonify({
+            "status": "ok",
+            "resultados": resposta
+        })
 
     return jsonify({
         "status": "erro",
-        "mensagem": "🌱 Planta não encontrada no banco."
+        "mensagem": "Planta não encontrada."
     })
+
+
+# -- Etapa 2 - evoluindo busca
+# --- Retorna apenas UMA planta na busca
+# @app.route("/buscar")
+# def buscar():
+
+#     termo = request.args.get("q", "").lower()
+#     plantas = carregar_dados()
+
+#     resultados = []
+
+#     for planta in plantas:
+#         score = calcular_relevancia(termo, planta)
+
+#         if score > 0:
+#             resultados.append({
+#                 "planta": planta,
+#                 "score": score
+#             })
+
+#     resultados.sort(key=lambda x: x["score"], reverse=True)
+
+#     if resultados:
+#         melhor = resultados[0]["planta"]
+
+#         return jsonify({
+#             "status": "ok",
+#             "nome": melhor["nome_popular"],
+#             "cientifico": melhor["nome_cientifico"],
+#             "beneficios": ", ".join(melhor["beneficios"]),
+#             "parte": ", ".join(melhor["parte_utilizada"]),
+#             "preparo": melhor["preparo"]
+#         })
+
+#     return jsonify({
+#         "status": "erro",
+#         "mensagem": "Planta não encontrada."
+#     })
+
+# -------------------------------------------- 
+
+# -- Etapa 1
+# -- PNL básica
+# @app.route("/buscar")
+# def buscar():
+
+#     termo = request.args.get("q", "").lower().strip()
+
+#     plantas = carregar_dados()
+
+#     resultados = []
+
+#     for planta in plantas:
+
+#         score = calcular_relevancia(termo, planta)
+
+#         # guardar as plantas relevantes
+#         if score > 0:
+#             resultados.append({
+#                 "planta": planta,
+#                 "score": score
+#             })
+
+#     # ordenar a planta por maior relevância, baseado no score da função
+#     resultados.sort(key=lambda x: x["score"], reverse=True)
+
+#     if resultados:
+
+#         melhor = resultados[0]["planta"]
+
+#         return jsonify({
+#             "status": "ok",
+#             "nome": melhor["nome_popular"],
+#             "cientifico": melhor["nome_cientifico"],
+#             "beneficios": ", ".join(melhor["beneficios"]),
+#             "parte": ", ".join(melhor["parte_utilizada"]),
+#             "preparo": melhor["preparo"]
+#         })
+
+#     return jsonify({
+#         "status": "erro",
+#         "mensagem": "🌱 Nenhuma planta relacionada encontrada."
+#     })
+
+# --------- Rota buscar sem PNL ------
+# ----- lembrando que na substituição da rota buscar acima, foi adicionado a função calcular relevância -----
+# @app.route("/buscar")
+# def buscar():
+
+#     termo = request.args.get("q", "").lower().strip()
+
+#     plantas = carregar_dados()
+
+#     for planta in plantas:
+
+#         nome = planta["nome_popular"].lower().strip()
+#         cientifico = planta["nome_cientifico"].lower().strip()
+
+#         # busca por nome popular
+#         if termo in nome:
+
+#             return jsonify({
+#                 "status": "ok",
+#                 "nome": planta["nome_popular"],
+#                 "cientifico": planta["nome_cientifico"],
+#                 "beneficios": ", ".join(planta["beneficios"]),
+#                 "parte": ", ".join(planta["parte_utilizada"]),
+#                 "preparo": planta["preparo"]
+#             })
+
+#         # busca por nome científico
+#         if termo in cientifico:
+
+#             return jsonify({
+#                 "status": "ok",
+#                 "nome": planta["nome_popular"],
+#                 "cientifico": planta["nome_cientifico"],
+#                 "beneficios": ", ".join(planta["beneficios"]),
+#                 "parte": ", ".join(planta["parte_utilizada"]),
+#                 "preparo": planta["preparo"]
+#             })
+
+#         # busca por sinônimos
+#         for sinonimo in planta["sinonimos"]:
+#             if termo in sinonimo.lower():
+
+#                 return jsonify({
+#                     "status": "ok",
+#                     "nome": planta["nome_popular"],
+#                     "cientifico": planta["nome_cientifico"],
+#                     "beneficios": ", ".join(planta["beneficios"]),
+#                     "parte": ", ".join(planta["parte_utilizada"]),
+#                     "preparo": planta["preparo"]
+#                 })
+
+#     return jsonify({
+#         "status": "erro",
+#         "mensagem": "🌱 Planta não encontrada no banco."
+#     })
 
 app.run(debug=True)

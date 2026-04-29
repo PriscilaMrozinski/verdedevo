@@ -330,5 +330,359 @@
     "preparo": "banho ou decocção",
     "contraindicacoes": "",
     "foto": ""
+  },
+  {
+    "id": 21,
+    "nome_popular": "Camomila",
+    "nome_cientifico": "Matricaria chamomilla",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "flores"
+    ],
+    "beneficios": [
+      "calmante",
+      "digestiva"
+    ],
+    "indicacoes": [
+      "insônia",
+      "cólicas"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 22,
+    "nome_popular": "Erva-cidreira",
+    "nome_cientifico": "Melissa officinalis",
+    "sinonimos": [
+      "melissa"
+    ],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "calmante"
+    ],
+    "indicacoes": [
+      "ansiedade",
+      "nervosismo"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 23,
+    "nome_popular": "Capim-santo",
+    "nome_cientifico": "Cymbopogon citratus",
+    "sinonimos": [
+      "capim-limão"
+    ],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "calmante",
+      "digestivo"
+    ],
+    "indicacoes": [
+      "estresse",
+      "má digestão"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 24,
+    "nome_popular": "Babosa",
+    "nome_cientifico": "Aloe vera",
+    "sinonimos": [
+      "aloe"
+    ],
+    "parte_utilizada": [
+      "gel"
+    ],
+    "beneficios": [
+      "cicatrizante",
+      "hidratante"
+    ],
+    "indicacoes": [
+      "queimaduras",
+      "pele seca"
+    ],
+    "preparo": "uso tópico",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 25,
+    "nome_popular": "Alecrim",
+    "nome_cientifico": "Rosmarinus officinalis",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "memória",
+      "estimulante"
+    ],
+    "indicacoes": [
+      "cansaço",
+      "má concentração"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 26,
+    "nome_popular": "Sálvia",
+    "nome_cientifico": "Salvia officinalis",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "anti-inflamatório"
+    ],
+    "indicacoes": [
+      "garganta",
+      "digestão"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 27,
+    "nome_popular": "Tanchagem",
+    "nome_cientifico": "Plantago major",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "anti-inflamatório"
+    ],
+    "indicacoes": [
+      "tosse",
+      "feridas"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 28,
+    "nome_popular": "Carqueja",
+    "nome_cientifico": "Baccharis trimera",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "ramos"
+    ],
+    "beneficios": [
+      "digestiva",
+      "fígado"
+    ],
+    "indicacoes": [
+      "má digestão",
+      "azia"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 29,
+    "nome_popular": "Jambolão",
+    "nome_cientifico": "Syzygium cumini",
+    "sinonimos": [
+      "jamelão"
+    ],
+    "parte_utilizada": [
+      "folhas",
+      "fruto"
+    ],
+    "beneficios": [
+      "tradicional"
+    ],
+    "indicacoes": [
+      "uso popular"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 30,
+    "nome_popular": "Gengibre",
+    "nome_cientifico": "Zingiber officinale",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "rizoma"
+    ],
+    "beneficios": [
+      "anti-inflamatório",
+      "digestivo"
+    ],
+    "indicacoes": [
+      "náusea",
+      "gripe"
+    ],
+    "preparo": "chá",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 31,
+    "nome_popular": "Cúrcuma",
+    "nome_cientifico": "Curcuma longa",
+    "sinonimos": [
+      "açafrão-da-terra"
+    ],
+    "parte_utilizada": [
+      "rizoma"
+    ],
+    "beneficios": [
+      "anti-inflamatório"
+    ],
+    "indicacoes": [
+      "dores articulares"
+    ],
+    "preparo": "uso culinário ou chá",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 32,
+    "nome_popular": "Canela",
+    "nome_cientifico": "Cinnamomum verum",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "casca"
+    ],
+    "beneficios": [
+      "estimulante"
+    ],
+    "indicacoes": [
+      "frio",
+      "má digestão"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 33,
+    "nome_popular": "Cravo-da-índia",
+    "nome_cientifico": "Syzygium aromaticum",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "botões florais"
+    ],
+    "beneficios": [
+      "antisséptico"
+    ],
+    "indicacoes": [
+      "dor de dente"
+    ],
+    "preparo": "uso local ou chá",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 34,
+    "nome_popular": "Lavanda",
+    "nome_cientifico": "Lavandula angustifolia",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "flores"
+    ],
+    "beneficios": [
+      "calmante"
+    ],
+    "indicacoes": [
+      "ansiedade",
+      "insônia"
+    ],
+    "preparo": "infusão ou aroma",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 35,
+    "nome_popular": "Neem",
+    "nome_cientifico": "Azadirachta indica",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "tradicional"
+    ],
+    "indicacoes": [
+      "pele"
+    ],
+    "preparo": "uso externo",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 36,
+    "nome_popular": "Urucum",
+    "nome_cientifico": "Bixa orellana",
+    "sinonimos": [
+      "colorau"
+    ],
+    "parte_utilizada": [
+      "sementes"
+    ],
+    "beneficios": [
+      "tradicional"
+    ],
+    "indicacoes": [
+      "uso popular"
+    ],
+    "preparo": "uso culinário",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 37,
+    "nome_popular": "Pata-de-vaca",
+    "nome_cientifico": "Bauhinia forficata",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "tradicional"
+    ],
+    "indicacoes": [
+      "uso popular"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
+  },
+  {
+    "id": 38,
+    "nome_popular": "Urtiga",
+    "nome_cientifico": "Urtica dioica",
+    "sinonimos": [],
+    "parte_utilizada": [
+      "folhas"
+    ],
+    "beneficios": [
+      "diurético"
+    ],
+    "indicacoes": [
+      "retenção de líquido"
+    ],
+    "preparo": "infusão",
+    "contraindicacoes": "",
+    "foto": ""
   }
 ]
