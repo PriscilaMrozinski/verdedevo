@@ -1,13 +1,22 @@
+# NLTK: biblioteca Python de Processamento de Linguagem Natural (PLN)
+# NLTK: oferece recursos como: tokenização de texto, stemming, lematização, 
+# análise de palavras, corpora liguísticos, classificação de textos
+from nltk.stem import RSLPStemmer
+
 from flask import Flask, render_template, request, redirect, jsonify
 import json
 
-# para normalizar acentos, ç, etc
+# Para normalizar acentos, ç e caracteres especiais
 import unicodedata 
 
 # Compara palavras parecidas para verificar erro de digitação
 import difflib
 
-#  ---------------------------------------------------
+# RSLPStemmer: algoritmo de stemming em português (reduz palavras ao radical)
+# RSLP: remove sufixos, reduz ao racial, ex.: ansiosa -> ansios
+stemmer = RSLPStemmer()
+
+
 
 app = Flask(
     __name__,
@@ -34,6 +43,20 @@ def normalizar_texto(texto):
 
 #  ---------------------------------------------------
 
+def radicalizar(texto):
+    texto = normalizar_texto(texto)
+    palavras = texto.split()
+
+    radicais = []
+
+    for palavra in palavras:
+        radicais.append(stemmer.stem(palavra))
+
+    return " ".join(radicais)
+
+
+# -----------------------------------------------------
+
 def palavras_parecidas(palavra, texto):
 
     palavras_texto = texto.split()
@@ -59,9 +82,26 @@ def salvar_dados(dados):
         json.dump(dados, arquivo, ensure_ascii=False, indent=2)
 
 
-# Com normalização de acento, ç, etc
-def calcular_relevancia(termo, planta):
+# -----------------------------------
+# IA simples: sinônimos de sintomas
+SINONIMOS = {
+    "dor de barriga": ["cólica", "má digestão", "gases"],
+    "barriga": ["cólica", "má digestão"],
+    "gripe": ["tosse", "garganta", "imunidade"],
+    "resfriado": ["tosse", "garganta"],
+    "nervoso": ["ansiedade", "estresse"],
+    "stress": ["estresse"],
+    "dor muscular": ["dor muscular", "inflamação"],
+    "pedra no rim": ["cálculos renais"],
+    "rim": ["cálculos renais"],
+    "sono ruim": ["sono", "insônia"],
+    "dormir": ["sono"],
+    "azia": ["azia", "gastrite"],
+    "estômago": ["azia", "gastrite", "má digestão"]
+}
 
+
+def calcular_relevancia(termo, planta):
     score = 0
 
     texto = (
@@ -72,17 +112,78 @@ def calcular_relevancia(termo, planta):
         " ".join(planta["sinonimos"])
     )
 
-    texto = normalizar_texto(texto)
-    palavras = normalizar_texto(termo).split()
+    # texto = normalizar_texto(texto)
+    # frase = normalizar_texto(termo)
+    
+    # PLN com stemming (RSLP/NLTK): reduz palavras ao radical para melhorar a busca semântica
+    # Ex: ansiosa -> ansios | ansiedade -> ansied
+    texto = radicalizar(texto)
+    frase = radicalizar(termo)
 
+
+    palavras = frase.split()
+
+    palavras_ignorar = [
+    "estou", "com", "de", "do", "da",
+    "muita", "muito", "tenho", "uma",
+    "o", "a", "e", "para", "sem",
+    "na", "no", "meu", "minha",
+    "ultimamente", "hoje", "ontem",
+    "sinto", "sentindo", "ando",
+    "nao", "não", "consigo",
+    "ficando", "mais", "menos",
+    "depois", "antes"
+    ]
+
+    # Busca normal
     for palavra in palavras:
+        if palavra in palavras_ignorar:
+            continue
         if palavra in texto:
-            score += 2
-        # para verificar erro de digitação (difflib)
+            score += 3
         elif palavras_parecidas(palavra, texto):
             score += 1
 
+    # Busca por frase completa
+    if " ".join(palavras) in texto:
+        score += 5
+
+    # NOVO: busca sinônimos
+    for chave in SINONIMOS:
+        if chave in frase:
+            for sinonimo in SINONIMOS[chave]:
+                sinonimo = normalizar_texto(sinonimo)
+                if sinonimo in texto:
+                    score += 4
+
     return score
+
+
+
+# Com normalização de acento, ç, etc
+# def calcular_relevancia(termo, planta):
+
+#     score = 0
+
+#     texto = (
+#         planta["nome_popular"] + " " +
+#         planta["nome_cientifico"] + " " +
+#         " ".join(planta["beneficios"]) + " " +
+#         " ".join(planta["indicacoes"]) + " " +
+#         " ".join(planta["sinonimos"])
+#     )
+
+#     texto = normalizar_texto(texto)
+#     palavras = normalizar_texto(termo).split()
+
+#     for palavra in palavras:
+#         if palavra in texto:
+#             score += 2
+#         # para verificar erro de digitação (difflib)
+#         elif palavras_parecidas(palavra, texto):
+#             score += 1
+
+#     return score
 
 # -- Etapa 2 - evoluindo busca
 # def calcular_relevancia(termo, planta):
