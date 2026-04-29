@@ -4,6 +4,9 @@ import json
 # para normalizar acentos, ç, etc
 import unicodedata 
 
+# Compara palavras parecidas para verificar erro de digitação
+import difflib
+
 #  ---------------------------------------------------
 
 app = Flask(
@@ -28,6 +31,21 @@ def normalizar_texto(texto):
     )
 
     return texto
+
+#  ---------------------------------------------------
+
+def palavras_parecidas(palavra, texto):
+
+    palavras_texto = texto.split()
+
+    parecidas = difflib.get_close_matches(
+        palavra,
+        palavras_texto,
+        n=1,
+        cutoff=0.75
+    )
+
+    return len(parecidas) > 0
 
 #  ---------------------------------------------------
 
@@ -59,6 +77,9 @@ def calcular_relevancia(termo, planta):
 
     for palavra in palavras:
         if palavra in texto:
+            score += 2
+        # para verificar erro de digitação (difflib)
+        elif palavras_parecidas(palavra, texto):
             score += 1
 
     return score
@@ -361,7 +382,7 @@ def buscar():
 # -------------------------------------------- 
 
 # -- Etapa 1
-# -- PNL básica
+# -- PNL básico
 # @app.route("/buscar")
 # def buscar():
 
